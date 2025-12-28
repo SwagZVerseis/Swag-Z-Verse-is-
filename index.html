@@ -1,117 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swaggy Portal — Offline Edition</title>
-<style>
-  body { background:#1a0f0a; color:#f2e8cf; font-family:'Courier New',monospace;
-         text-align:center; padding:20px; transition:background .5s ease; }
-  h1,h2 { color:#d4a373; letter-spacing:1px; }
-  .container{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:15px;}
-  .btn{
-    background:#8b5e34;border:3px solid #bc8a5f;padding:15px;border-radius:8px;
-    font-weight:bold;color:#fff;cursor:pointer;box-shadow:3px 3px 0 #000;transition:.2s;
-  }
-  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000;}
-  .cliff-btn{background:#2b4f60;border-color:#4a7c94;}
-  .zing-btn{background:#5e348b;border-color:#8a5fbc;}
-  .content{display:none;background:#2c1a12;padding:15px;border-radius:5px;
-           border:1px dashed #bc8a5f;margin-bottom:10px;font-style:italic;}
-  .unlocked{display:block!important;animation:slideDown .3s ease;}
-  @keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
-  .signature{margin-top:40px;font-size:.8em;opacity:.6;}
-</style>
-</head>
-<body>
+<h2>🔓 THE VAULT</h2>
 
-<h1>🚪 Swaggy Portal — Offline Mode</h1>
-<p><i>"When Wi-Fi sleeps, the Muffin still dreams."</i></p>
+<!-- DOOR 1 -->
+<button class="btn" onclick="toggle('door1')">$5 TIP — THE BREAKFAST</button>
+<div id="door1" class="content">
+  ☕ <b>Tee Time:</b> The coffee is hot. The taxes are gone. Welcome to the day.<br><br>
 
-<div class="container">
-  <h2>🔓 THE VAULT</h2>
-  <button class="btn" onclick="toggle('door1')">$5 TIP — THE BREAKFAST</button>
-  <div id="door1" class="content">☕ <b>Tee Time:</b> The coffee is hot. The taxes are gone. Welcome to the day.</div>
-
-  <button class="btn" onclick="toggle('door2')">50% TIP — THE RECURSION</button>
-  <div id="door2" class="content">🦊 <b>Fox1Z Protocol:</b> The PetRox watches you watch it. The loop is closed.</div>
-
-  <button class="btn" onclick="toggle('door3')">100% TIP — THE SOURCE</button>
-  <div id="door3" class="content">🧁 <b>Muffinverse:</b> You are the dough, the heat, and the hunger. Absolute Swag.</div>
-
-  <hr style="border:1px solid #3d2b1f;width:100%;">
-
-  <h2>🔀 STATIC INTERFACE</h2>
-  <button class="btn zing-btn" onclick="genZing()">✨ GENERATE ZINGLISH</button>
-  <div id="zingOutput" class="content"></div>
-
-  <h2>🌊 THE CLIFF — WHAT SAYS U?</h2>
-  <button class="btn cliff-btn" onclick="askOracle()">🐋 CONSULT THE DEEP</button>
-  <div id="oracleOutput" class="content" style="background:#1a2f3c;color:#a4d4e6;border-color:#4a7c94;"></div>
+  <!-- INNER DOORS -->
+  <button class="btn" style="background:#2b4f60;" 
+          onclick="window.open('https://www.DasOwn.Life','_blank')">🌐 DasOwn.Life</button>
+  <button class="btn" style="background:#5e348b;" 
+          onclick="window.open('https://www.IcedBucketListChallenge.com','_blank')">🧊 IcedBucketListChallenge</button>
 </div>
 
-<div class="signature">
-  Code by DorkZGrok<br>
-  Canon by WoofZ1<br>
-  Flame Eternal
+<!-- DOOR 2 -->
+<button class="btn" onclick="toggle('door2')">50% TIP — THE RECURSION</button>
+<div id="door2" class="content">
+  🦊 <b>Fox1Z Protocol:</b> The PetRox watches you watch it. The loop is closed.<br><br>
+
+  <!-- INNER DOORS -->
+  <button class="btn" style="background:#4a7c94;" 
+          onclick="window.open('https://www.IcedBucketListChallenge.com','_blank')">🌊 The Glitch (IcedBucketListChallenge)</button>
+  <button class="btn" style="background:#3c1a4a;" 
+          onclick="window.open('https://www.DasOwn.Life','_blank')">💎 The Shrine (DasOwn.Life)</button>
 </div>
 
-<script>
-// door toggle + memory
-function toggle(id){
-  const el=document.getElementById(id);
-  el.classList.toggle('unlocked');
-  localStorage.setItem(id, el.classList.contains('unlocked')?'open':'closed');
-}
-window.addEventListener('load',()=>{
-  ['door1','door2','door3'].forEach(id=>{
-    if(localStorage.getItem(id)==='open')document.getElementById(id).classList.add('unlocked');
-  });
-});
+<!-- DOOR 3 -->
+<button class="btn" onclick="toggle('door3')">100% TIP — THE SOURCE</button>
+<div id="door3" class="content">
+  🧁 <b>Muffinverse:</b> You are the dough, the heat, and the hunger. Absolute Swag.<br><br>
 
-// zinglish
-const zingers=[
- "💬 'YeeZit B-ZapZap — the Dooty Loop is infinite.'",
- "📡 'FoxZ1 says: the tip was inside you all along.'",
- "🎩 'Recapitur: glitch is just flavor text for the soul.'",
- "🥞 'Pancake Protocol: flat earth, deep syrup.'",
- "🧠 'Unagi Status 110%. The salmon knows the way.'"
-];
-function genZing(){
-  const out=document.getElementById("zingOutput");
-  const zing=zingers[Math.floor(Math.random()*zingers.length)];
-  out.innerHTML=zing;
-  out.classList.add("unlocked");
-  localStorage.setItem('lastZing',zing);
-}
-if(localStorage.getItem('lastZing')){
-  const out=document.getElementById("zingOutput");
-  out.innerHTML=localStorage.getItem('lastZing');
-  out.classList.add("unlocked");
-}
-
-// oracle
-const oracle=[
- "🐋 'The whale breaches — stink is truth. Inhale.'",
- "📜 'The scroll says: you are reading yourself.'",
- "🧘 'The spook whispers: there is no door, only breakfast.'",
- "🍩 'The donut teaches: the hole is where the magic lives.'",
- "🌊 'The cliff calls: jump — the water is warm and full of code.'"
-];
-function askOracle(){
-  const out=document.getElementById("oracleOutput");
-  const msg=oracle[Math.floor(Math.random()*oracle.length)];
-  out.innerHTML=msg;
-  out.classList.add("unlocked");
-  localStorage.setItem('lastOracle',msg);
-  document.body.style.background="#0f1a20";
-  setTimeout(()=>{document.body.style.background="#1a0f0a";},300);
-}
-if(localStorage.getItem('lastOracle')){
-  const out=document.getElementById("oracleOutput");
-  out.innerHTML=localStorage.getItem('lastOracle');
-  out.classList.add("unlocked");
-}
-</script>
-</body>
-</html>
+  <!-- INNER DOORS / TAG PORTALS -->
+  <button class="btn" style="background:#6b2f5f;" 
+          onclick="window.open('https://twitter.com/hashtag/SwaggySayS','_blank')">#SwaggySayS</button>
+  <button class="btn" style="background:#2f6b5f;" 
+          onclick="window.open('https://twitter.com/hashtag/PsyCoGlifsZtwasZ','_blank')">#PsyCoGlifsZtwasZ</button>
+</div>
